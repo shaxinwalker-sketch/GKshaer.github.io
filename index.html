@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>35元收款 - 加入社群</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .amount {
+            text-align: center;
+            font-size: 36px;
+            color: #e63946;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .pay-methods {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .pay-item {
+            text-align: center;
+            width: 45%;
+            margin-bottom: 20px;
+        }
+        .pay-item img {
+            width: 100%;
+            max-width: 250px;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .pay-item p {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+        .confirm-btn {
+            display: block;
+            width: 80%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #e63946;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .confirm-btn:hover {
+            background-color: #d62828;
+        }
+        /* 群二维码页面样式 */
+        .group-page {
+            display: none;
+            text-align: center;
+        }
+        .group-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .group-qrcodes {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .group-item {
+            width: 45%;
+            margin-bottom: 20px;
+        }
+        .group-item img {
+            width: 100%;
+            max-width: 250px;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .group-item p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- 微信收款码 -->
+<img src="wechat-pay.png" alt="微信收款码">
+<!-- 支付宝收款码 -->
+<img src="alipay-pay.png" alt="支付宝收款码">
+<!-- 微信群二维码 -->
+<img src="wechat-group.png" alt="微信群二维码">
+<!-- QQ群二维码 -->
+<img src="qq-group.png" alt="QQ群二维码">
+                <p>QQ群</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 跳转至群二维码页面
+        function jumpToGroup() {
+            document.getElementById('pay-page').style.display = 'none';
+            document.getElementById('group-page').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
