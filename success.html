@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付成功</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: #1a1a2e; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { max-width: 400px; width: 100%; background: #16213e; border-radius: 16px; padding: 30px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        .success-icon { font-size: 60px; color: #07C160; margin-bottom: 20px; }
+        h1 { font-size: 24px; margin-bottom: 10px; }
+        p { color: #a0a0b8; margin-bottom: 25px; line-height: 1.6; }
+        .qrcode { width: 250px; height: 250px; margin: 0 auto 20px; border-radius: 8px; overflow: hidden; }
+        .qrcode img { width: 100%; height: 100%; object-fit: cover; }
+        .tip { font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>支付成功！</h1>
+        <p>请扫码加入永久粉丝群<br>后续所有直播密码都会发在群里</p>
+        
+        <div class="qrcode">
+            <!-- 这里会显示新群二维码 -->
+            <img src="wechat-group.png" alt="微信群二维码">
+        </div>
+        
+        <div class="tip">
+            若扫码失败，请联系客服：17561161510
+        </div>
+    </div>
+</body>
+</html>
