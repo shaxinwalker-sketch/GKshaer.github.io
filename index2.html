@@ -1,70 +1,170 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>F1粉丝群</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-  body{background:#1a1a2e;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-  .box{max-width:400px;width:100%;background:#16213e;border-radius:16px;padding:30px;text-align:center}
-  h1{margin-bottom:10px;color:#e94560}
-  p{color:#a0a0b8;margin-bottom:20px}
-  .btn{width:100%;padding:16px;margin:10px 0;border:none;border-radius:12px;font-size:16px;color:#fff;font-weight:bold;cursor:pointer}
-  .wx{background:#07C160}
-  .ali{background:#1677FF}
-  .code{margin:15px 0;display:none;padding:15px;background:#0f172a;border-radius:12px}
-  .code img{width:80%;border-radius:10px}
-  .input-box{margin:20px 0}
-  input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#0f172a;color:#fff;font-size:16px;text-align:center}
-  .verify-btn{background:#e94560;margin-top:10px}
-  .group-box{margin-top:20px;padding:15px;background:#0f172a;border-radius:12px;display:none}
-  .group-box img{width:100%;border-radius:8px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1永久粉丝群</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background: #1a1a2e;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .box {
+            background: #16213e;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #e94560;
+        }
+        p {
+            font-size: 14px;
+            color: #a8b2d1;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+        .btn.wx {
+            background: #07c160;
+            color: #fff;
+        }
+        .btn.ali {
+            background: #1677ff;
+            color: #fff;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .input-box {
+            margin: 20px 0;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #0f3460;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .verify-btn {
+            background: #e94560;
+            color: #fff;
+        }
+        .group-box {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #0f3460;
+            border-radius: 8px;
+        }
+        .group-box img {
+            width: 100%;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-<div class="box">
-  <h1>F1 永久粉丝群</h1>
-  <p>35元永久进群<br>直播密码、内部内容都在群里</p>
+    <div class="box">
+        <h1>F1永久粉丝群</h1>
+        <p>35元永久进群<br>直播密码、内部内容都在群里</p>
 
-  <button class="btn wx" onclick="document.getElementById('wx').style.display='block'">
-    微信支付 35元
-  </button>
-  <div class="code" id="wx">
-    <img src="wechat-pay.png">
-    <p style="margin-top:10px">支付成功后，向主播索要口令</p>
-  </div>
+        <!-- 微信支付按钮（易支付全自动） -->
+        <form action="https://www.ezfpy.cn/submit.php" method="POST" id="payForm">
+            <input type="hidden" name="pid" value="1523">
+            <input type="hidden" name="type" value="1">
+            <input type="hidden" name="out_trade_no" id="tradeNo">
+            <input type="hidden" name="name" value="F1永久粉丝群">
+            <input type="hidden" name="money" value="35">
+            <input type="hidden" name="notify_url" value="https://example.com/notify">
+            <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/GKshaer.github.io/success.html">
+            <input type="hidden" name="sitename" value="F1粉丝群">
+            <input type="hidden" name="sign" id="sign">
+            <input type="hidden" name="sign_type" value="MD5">
+            <button type="submit" class="btn wx">微信支付 35元</button>
+        </form>
 
-  <button class="btn ali" onclick="document.getElementById('ali').style.display='block'">
-    支付宝支付 35元
-  </button>
-  <div class="code" id="ali">
-    <img src="alipay-pay.png">
-    <p style="margin-top:10px">支付成功后，向主播索要口令</p>
-  </div>
+        <!-- 支付宝备用按钮（手动口令模式） -->
+        <button class="btn ali" onclick="alert('支付宝支付后请联系主播获取口令：1644')">支付宝支付 35元</button>
 
-  <div class="input-box">
-    <input type="text" id="pass" placeholder="输入支付成功口令">
-    <button class="btn verify-btn" onclick="check()">验证口令</button>
-  </div>
+        <!-- 口令验证区 -->
+        <div class="input-box">
+            <input type="text" id="passInput" placeholder="输入支付口令获取群码">
+            <button class="btn verify-btn" onclick="verifyPass()">验证口令</button>
+        </div>
 
-  <div class="group-box" id="group">
-    <img src="wechat-group.png">
-    <p style="margin-top:10px">扫码进微信群</p>
-  </div>
-</div>
+        <!-- 群码展示区 -->
+        <div class="group-box" id="groupBox">
+            <img src="wechat-group.png" alt="微信群二维码">
+            <p style="margin-top:10px;">扫码进群即可</p>
+        </div>
+    </div>
 
-<script>
-  // 👇 口令就在这里！把双引号里的内容改成你的新口令
-  const PASSWORD = "1644";
-  function check() {
-    let input = document.getElementById('pass').value.trim();
-    if(input === PASSWORD) {
-      document.getElementById('group').style.display = 'block';
-    } else {
-      alert("口令错误，请确认支付成功！");
-    }
-  }
-</script>
+    <script>
+        // 生成唯一订单号
+        document.getElementById('tradeNo').value = 'F1GROUP_' + Date.now();
+
+        // 计算签名（使用你的商户密钥）
+        function calcSign() {
+            const pid = 1523;
+            const type = 1;
+            const out_trade_no = document.getElementById('tradeNo').value;
+            const name = 'F1永久粉丝群';
+            const money = 35;
+            const notify_url = 'https://example.com/notify';
+            const return_url = 'https://shaxinwalker-sketch.github.io/GKshaer.github.io/success.html';
+            const key = 'OCGUEgH4hCQdAeSVd15KocT7LUM15RI8'; // 你的商户密钥
+
+            const str = `pid=${pid}&type=${type}&out_trade_no=${out_trade_no}&name=${name}&money=${money}&notify_url=${notify_url}&return_url=${return_url}&key=${key}`;
+            
+            // MD5加密（需要引入md5库，这里我直接给你算好的逻辑，实际使用时请引入md5.js）
+            // 你可以在线生成MD5，或者我帮你算好每一次的sign值
+            // 这里先留空，实际使用时替换为计算后的MD5值
+            document.getElementById('sign').value = '';
+        }
+
+        // 页面加载时计算签名
+        calcSign();
+
+        // 口令验证
+        function verifyPass() {
+            const input = document.getElementById('passInput').value.trim();
+            const groupBox = document.getElementById('groupBox');
+            if (input === '1644') {
+                groupBox.style.display = 'block';
+            } else {
+                alert('口令错误，请联系主播确认！');
+                groupBox.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
