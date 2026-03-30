@@ -99,20 +99,38 @@
         <p>35元永久进群<br>直播密码、内部内容都在群里</p>
 
         <!-- 微信支付按钮（易支付全自动） -->
-        <form action="https://www.ezfpy.cn/submit.php" method="POST" id="payForm">
-            <input type="hidden" name="pid" value="1523">
-            <input type="hidden" name="type" value="1">
-            <input type="hidden" name="out_trade_no" id="tradeNo">
-            <input type="hidden" name="name" value="F1永久粉丝群">
-            <input type="hidden" name="money" value="35">
-            <input type="hidden" name="notify_url" value="https://example.com/notify">
-            <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/GKshaer.github.io/success.html">
-            <input type="hidden" name="sitename" value="F1粉丝群">
-            <input type="hidden" name="sign" id="sign">
-            <input type="hidden" name="sign_type" value="MD5">
-            <button type="submit" class="btn wx">微信支付 35元</button>
-        </form>
+        
+<!-- 微信支付按钮（全自动） -->
+<form action="https://www.ezfpy.cn/submit.php" method="POST" id="wxPayForm">
+  <input type="hidden" name="pid" value="1523"> <!-- 替换成你的易支付PID -->
+  <input type="hidden" name="type" value="1"> <!-- 微信通道type，一般是1 -->
+  <input type="hidden" name="out_trade_no" id="wxTradeNo">
+  <input type="hidden" name="name" value="F1永久粉丝群">
+  <input type="hidden" name="money" value="35">
+  <input type="hidden" name="notify_url" value="https://你的回调地址"> <!-- 易支付后台的回调地址 -->
+  <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/你的群码页面.html"> <!-- 付款成功后跳转的群码页 -->
+  <input type="hidden" name="sitename" value="F1粉丝群">
+  <input type="hidden" name="sign" id="wxSign">
+  <input type="hidden" name="sign_type" value="MD5">
+  <button type="submit" class="btn green">微信支付 35元</button>
+</form>
 
+<!-- 支付宝支付按钮（全自动） -->
+<form action="https://www.ezfpy.cn/submit.php" method="POST" id="aliPayForm">
+  <input type="hidden" name="pid" value="1523"> <!-- 替换成你的易支付PID -->
+  <input type="hidden" name="type" value="2"> <!-- 支付宝通道type，一般是2 -->
+  <input type="hidden" name="out_trade_no" id="aliTradeNo">
+  <input type="hidden" name="name" value="F1永久粉丝群">
+  <input type="hidden" name="money" value="35">
+  <input type="hidden" name="notify_url" value="https://你的回调地址"> <!-- 易支付后台的回调地址 -->
+  <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/你的群码页面.html"> <!-- 付款成功后跳转的群码页 -->
+  <input type="hidden" name="sitename" value="F1粉丝群">
+  <input type="hidden" name="sign" id="aliSign">
+  <input type="hidden" name="sign_type" value="MD5">
+  <button type="submit" class="btn blue">支付宝支付 35元</button>
+</form>
+
+<!-- 删掉原来的手动口令部分，只保留这两个支付按钮 -->
         <!-- 支付宝备用按钮（手动口令模式） -->
         <button class="btn ali" onclick="alert('支付宝支付后请联系主播获取口令：1644')">支付宝支付 35元</button>
 
@@ -130,30 +148,46 @@
     </div>
 
     <script>
-        // 生成唯一订单号
-        document.getElementById('tradeNo').value = 'F1GROUP_' + Date.now();
+      // 生成微信订单号
+document.getElementById('wxTradeNo').value = 'F1GROUP_WX_' + Date.now();
+// 生成支付宝订单号
+document.getElementById('aliTradeNo').value = 'F1GROUP_ALI_' + Date.now();
 
-        // 计算签名（使用你的商户密钥）
-        function calcSign() {
-            const pid = 1523;
-            const type = 1;
-            const out_trade_no = document.getElementById('tradeNo').value;
-            const name = 'F1永久粉丝群';
-            const money = 35;
-            const notify_url = 'https://example.com/notify';
-            const return_url = 'https://shaxinwalker-sketch.github.io/GKshaer.github.io/success.html';
-            const key = 'OCGUEgH4hCQdAeSVd15KocT7LUM15RI8'; // 你的商户密钥
+// 计算微信签名（替换成你的易支付密钥）
+function calcWxSign() {
+  const pid = "1523"; // 你的易支付PID
+  const type = "1";
+  const out_trade_no = document.getElementById('wxTradeNo').value;
+  const name = "F1永久粉丝群";
+  const money = "35";
+  const notify_url = "https://你的回调地址";
+  const return_url = "https://shaxinwalker-sketch.github.io/你的群码页面.html";
+  const sitename = "F1粉丝群";
+  const key = "你的易支付密钥"; // 易支付后台的对接密钥
 
-            const str = `pid=${pid}&type=${type}&out_trade_no=${out_trade_no}&name=${name}&money=${money}&notify_url=${notify_url}&return_url=${return_url}&key=${key}`;
-            
-            // MD5加密（需要引入md5库，这里我直接给你算好的逻辑，实际使用时请引入md5.js）
-            // 你可以在线生成MD5，或者我帮你算好每一次的sign值
-            // 这里先留空，实际使用时替换为计算后的MD5值
-            document.getElementById('sign').value = md5(str);
-        }
+  const str = `pid=${pid}&type=${type}&out_trade_no=${out_trade_no}&name=${name}&money=${money}&notify_url=${notify_url}&return_url=${return_url}&sitename=${sitename}${key}`;
+  document.getElementById('wxSign').value = md5(str);
+}
 
-        // 页面加载时计算签名
-        calcSign();
+// 计算支付宝签名（替换成你的易支付密钥）
+function calcAliSign() {
+  const pid = "1523"; // 你的易支付PID
+  const type = "2";
+  const out_trade_no = document.getElementById('aliTradeNo').value;
+  const name = "F1永久粉丝群";
+  const money = "35";
+  const notify_url = "https://你的回调地址";
+  const return_url = "https://shaxinwalker-sketch.github.io/你的群码页面.html";
+  const sitename = "F1粉丝群";
+  const key = "你的易支付密钥"; // 易支付后台的对接密钥
+
+  const str = `pid=${pid}&type=${type}&out_trade_no=${out_trade_no}&name=${name}&money=${money}&notify_url=${notify_url}&return_url=${return_url}&sitename=${sitename}${key}`;
+  document.getElementById('aliSign').value = md5(str);
+}
+
+// 页面加载时计算签名
+calcWxSign();
+calcAliSign();
 
         // 口令验证
         function verifyPass() {
