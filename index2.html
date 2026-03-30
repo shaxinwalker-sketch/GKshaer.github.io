@@ -10,11 +10,16 @@
   .box{max-width:400px;width:100%;background:#16213e;border-radius:16px;padding:30px;text-align:center}
   h1{margin-bottom:10px;color:#e94560}
   p{color:#a0a0b8;margin-bottom:20px}
-  .btn{width:100%;padding:16px;margin:10px 0;border:none;border-radius:12px;font-size:16px;color:#fff;font-weight:bold}
+  .btn{width:100%;padding:16px;margin:10px 0;border:none;border-radius:12px;font-size:16px;color:#fff;font-weight:bold;cursor:pointer}
   .wx{background:#07C160}
   .ali{background:#1677FF}
-  .code{margin:15px 0;display:none}
+  .code{margin:15px 0;display:none;padding:15px;background:#0f172a;border-radius:12px}
   .code img{width:80%;border-radius:10px}
+  .input-box{margin:20px 0}
+  input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#0f172a;color:#fff;font-size:16px;text-align:center}
+  .verify-btn{background:#e94560;margin-top:10px}
+  .group-box{margin-top:20px;padding:15px;background:#0f172a;border-radius:12px;display:none}
+  .group-box img{width:100%;border-radius:8px}
 </style>
 </head>
 <body>
@@ -27,7 +32,7 @@
   </button>
   <div class="code" id="wx">
     <img src="wechat-pay.png">
-   <p style="margin-top:10px">支付成功后，自动跳转微信群二维码</p>
+    <p style="margin-top:10px">支付成功后，向主播索要口令</p>
   </div>
 
   <button class="btn ali" onclick="document.getElementById('ali').style.display='block'">
@@ -35,8 +40,31 @@
   </button>
   <div class="code" id="ali">
     <img src="alipay-pay.png">
-   <p style="margin-top:10px">支付成功后，自动跳转微信群二维码</p>
+    <p style="margin-top:10px">支付成功后，向主播索要口令</p>
+  </div>
+
+  <div class="input-box">
+    <input type="text" id="pass" placeholder="输入支付成功口令">
+    <button class="btn verify-btn" onclick="check()">验证口令</button>
+  </div>
+
+  <div class="group-box" id="group">
+    <img src="wechat-group.png">
+    <p style="margin-top:10px">扫码进微信群</p>
   </div>
 </div>
+
+<script>
+  // 👇 口令就在这里！把双引号里的内容改成你的新口令
+  const PASSWORD = "1644";
+  function check() {
+    let input = document.getElementById('pass').value.trim();
+    if(input === PASSWORD) {
+      document.getElementById('group').style.display = 'block';
+    } else {
+      alert("口令错误，请确认支付成功！");
+    }
+  }
+</script>
 </body>
 </html>
