@@ -126,10 +126,12 @@
 
     <script>
         // 跳转至群二维码页面
-        function jumpToGroup() {
-            document.getElementById('pay-page').style.display = 'none';
-            document.getElementById('group-page').style.display = 'block';
-        }
+       function pay(type) {
+    alert("正在跳转到" + (type === 'wechat' ? "微信" : "支付宝") + "支付...");
+    setTimeout(() => {
+        window.location.href = "success.html";
+    }, 1000);
+}
     </script>
 </body>
 </html>
