@@ -9,196 +9,317 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft Yahei", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         body {
-            background: #1a1a2e;
+            background-color: #1a1d29;
             color: #fff;
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
         }
-        .box {
-            background: #16213e;
+        .container {
+            background-color: #161a28;
             padding: 30px;
             border-radius: 16px;
-            max-width: 400px;
             width: 100%;
+            max-width: 600px;
             text-align: center;
         }
         h1 {
-            font-size: 24px;
+            color: #ff4757;
+            font-size: 2.5rem;
             margin-bottom: 15px;
-            color: #e94560;
         }
-        p {
-            font-size: 14px;
-            color: #a8b2d1;
-            margin-bottom: 25px;
+        .desc {
+            color: #a4b0be;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
         .btn {
             display: block;
             width: 100%;
-            padding: 14px;
+            padding: 18px;
+            margin: 12px 0;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: 500;
             cursor: pointer;
-            margin-bottom: 15px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
-        .btn.wx {
-            background: #07c160;
-            color: #fff;
+        .btn.white {
+            background-color: #f1f2f6;
+            color: #2f3542;
         }
-        .btn.ali {
-            background: #1677ff;
+        .btn.blue {
+            background-color: #3742fa;
             color: #fff;
         }
         .btn:hover {
-            opacity: 0.9;
-        }
-        .input-box {
-            margin: 20px 0;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            background: #0f3460;
-            color: #fff;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .verify-btn {
-            background: #e94560;
-            color: #fff;
-        }
-        .group-box {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: #0f3460;
-            border-radius: 8px;
-        }
-        .group-box img {
-            width: 100%;
-            border-radius: 8px;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
     </style>
-    <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
 </head>
 <body>
-    <div class="box">
+    <div class="container">
         <h1>F1永久粉丝群</h1>
-        <p>35元永久进群<br>直播密码、内部内容都在群里</p>
-
-        <!-- 微信支付按钮（易支付全自动） -->
-        
-<!-- 微信支付按钮（全自动） -->
-<form action="https://www.ezfpy.cn/submit.php" method="POST" id="wxPayForm">
-  <input type="hidden" name="pid" value="1523"> <!-- 替换成你的易支付PID -->
-  <input type="hidden" name="type" value="1"> <!-- 微信通道type，一般是1 -->
-  <input type="hidden" name="out_trade_no" id="wxTradeNo">
-  <input type="hidden" name="name" value="F1永久粉丝群">
-  <input type="hidden" name="money" value="35">
-  <input type="hidden" name="notify_url" value="https://你的回调地址"> <!-- 易支付后台的回调地址 -->
-  <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/你的群码页面.html"> <!-- 付款成功后跳转的群码页 -->
-  <input type="hidden" name="sitename" value="F1粉丝群">
-  <input type="hidden" name="sign" id="wxSign">
-  <input type="hidden" name="sign_type" value="MD5">
-  <button type="submit" class="btn green">微信支付 35元</button>
-</form>
-
-<!-- 支付宝支付按钮（全自动） -->
-<form action="https://www.ezfpy.cn/submit.php" method="POST" id="aliPayForm">
-  <input type="hidden" name="pid" value="1523"> <!-- 替换成你的易支付PID -->
-  <input type="hidden" name="type" value="2"> <!-- 支付宝通道type，一般是2 -->
-  <input type="hidden" name="out_trade_no" id="aliTradeNo">
-  <input type="hidden" name="name" value="F1永久粉丝群">
-  <input type="hidden" name="money" value="35">
-  <input type="hidden" name="notify_url" value="https://你的回调地址"> <!-- 易支付后台的回调地址 -->
-  <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/你的群码页面.html"> <!-- 付款成功后跳转的群码页 -->
-  <input type="hidden" name="sitename" value="F1粉丝群">
-  <input type="hidden" name="sign" id="aliSign">
-  <input type="hidden" name="sign_type" value="MD5">
-  <button type="submit" class="btn blue">支付宝支付 35元</button>
-</form>
-
-<!-- 删掉原来的手动口令部分，只保留这两个支付按钮 -->
-        <!-- 支付宝备用按钮（手动口令模式） -->
-        <button class="btn ali" onclick="alert('支付宝支付后请联系主播获取口令：1644')">支付宝支付 35元</button>
-
-        <!-- 口令验证区 -->
-        <div class="input-box">
-            <input type="text" id="passInput" placeholder="输入支付口令获取群码">
-            <button class="btn verify-btn" onclick="verifyPass()">验证口令</button>
+        <div class="desc">
+            35元永久进群<br>
+            直播密码、内部内容都在群里
         </div>
 
-        <!-- 群码展示区 -->
-        <div class="group-box" id="groupBox">
-            <img src="new-wechat-group.png" alt="微信群二维码">
-            <p style="margin-top:10px;">扫码进群即可</p>
-        </div>
+        <!-- 微信支付表单 -->
+        <form action="https://www.ezfpy.cn/submit.php" method="POST" target="_blank">
+            <input type="hidden" name="pid" value="1523">
+            <input type="hidden" name="type" value="1">
+            <input type="hidden" name="out_trade_no" id="wxTradeNo" value="">
+            <input type="hidden" name="name" value="F1永久粉丝群">
+            <input type="hidden" name="money" value="35">
+            <input type="hidden" name="notify_url" value="https://你的回调地址">
+            <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/你的群码页面.html">
+            <input type="hidden" name="sitename" value="F1粉丝群">
+            <input type="hidden" name="sign" id="wxSign">
+            <input type="hidden" name="sign_type" value="MD5">
+            <button type="submit" class="btn white">微信支付 35元</button>
+        </form>
+
+        <!-- 支付宝支付表单 -->
+        <form action="https://www.ezfpy.cn/submit.php" method="POST" target="_blank">
+            <input type="hidden" name="pid" value="1523">
+            <input type="hidden" name="type" value="2">
+            <input type="hidden" name="out_trade_no" id="aliTradeNo" value="">
+            <input type="hidden" name="name" value="F1永久粉丝群">
+            <input type="hidden" name="money" value="35">
+            <input type="hidden" name="notify_url" value="https://你的回调地址">
+            <input type="hidden" name="return_url" value="https://shaxinwalker-sketch.github.io/你的群码页面.html">
+            <input type="hidden" name="sitename" value="F1粉丝群">
+            <input type="hidden" name="sign" id="aliSign">
+            <input type="hidden" name="sign_type" value="MD5">
+            <button type="submit" class="btn blue">支付宝支付 35元</button>
+        </form>
     </div>
 
     <script>
-      // 生成微信订单号
-document.getElementById('wxTradeNo').value = 'F1GROUP_WX_' + Date.now();
-// 生成支付宝订单号
-document.getElementById('aliTradeNo').value = 'F1GROUP_ALI_' + Date.now();
+        // 自动生成唯一订单号
+        document.getElementById('wxTradeNo').value = 'F1GROUP_WX_' + Date.now();
+        document.getElementById('aliTradeNo').value = 'F1GROUP_ALI_' + Date.now();
 
-// 计算微信签名（替换成你的易支付密钥）
-function calcWxSign() {
-  const pid = "1523"; // 你的易支付PID
-  const type = "1";
-  const out_trade_no = document.getElementById('wxTradeNo').value;
-  const name = "F1永久粉丝群";
-  const money = "35";
-  const notify_url = "https://你的回调地址";
-  const return_url = "https://shaxinwalker-sketch.github.io/你的群码页面.html";
-  const sitename = "F1粉丝群";
-  const key = "你的易支付密钥"; // 易支付后台的对接密钥
+        // 计算签名（请替换成你的易支付密钥）
+        const PID = "1523";
+        const KEY = "你的易支付密钥";
 
-  const str = `pid=${pid}&type=${type}&out_trade_no=${out_trade_no}&name=${name}&money=${money}&notify_url=${notify_url}&return_url=${return_url}&sitename=${sitename}${key}`;
-  document.getElementById('wxSign').value = md5(str);
-}
+        function calcSign(params) {
+            let str = '';
+            Object.keys(params).sort().forEach(key => {
+                if (params[key] !== '' && key !== 'sign' && key !== 'sign_type') {
+                    str += key + '=' + params[key] + '&';
+                }
+            });
+            str = str.slice(0, -1) + KEY;
+            return md5(str);
+        }
 
-// 计算支付宝签名（替换成你的易支付密钥）
-function calcAliSign() {
-  const pid = "1523"; // 你的易支付PID
-  const type = "2";
-  const out_trade_no = document.getElementById('aliTradeNo').value;
-  const name = "F1永久粉丝群";
-  const money = "35";
-  const notify_url = "https://你的回调地址";
-  const return_url = "https://shaxinwalker-sketch.github.io/你的群码页面.html";
-  const sitename = "F1粉丝群";
-  const key = "你的易支付密钥"; // 易支付后台的对接密钥
+        // 微信支付签名
+        const wxParams = {
+            pid: PID,
+            type: "1",
+            out_trade_no: document.getElementById('wxTradeNo').value,
+            name: "F1永久粉丝群",
+            money: "35",
+            notify_url: "https://你的回调地址",
+            return_url: "https://shaxinwalker-sketch.github.io/你的群码页面.html",
+            sitename: "F1粉丝群"
+        };
+        document.getElementById('wxSign').value = calcSign(wxParams);
 
-  const str = `pid=${pid}&type=${type}&out_trade_no=${out_trade_no}&name=${name}&money=${money}&notify_url=${notify_url}&return_url=${return_url}&sitename=${sitename}${key}`;
-  document.getElementById('aliSign').value = md5(str);
-}
+        // 支付宝支付签名
+        const aliParams = {
+            pid: PID,
+            type: "2",
+            out_trade_no: document.getElementById('aliTradeNo').value,
+            name: "F1永久粉丝群",
+            money: "35",
+            notify_url: "https://你的回调地址",
+            return_url: "https://shaxinwalker-sketch.github.io/你的群码页面.html",
+            sitename: "F1粉丝群"
+        };
+        document.getElementById('aliSign').value = calcSign(aliParams);
 
-// 页面加载时计算签名
-calcWxSign();
-calcAliSign();
-
-        // 口令验证
-        function verifyPass() {
-            const input = document.getElementById('passInput').value.trim();
-            const groupBox = document.getElementById('groupBox');
-            if (input === '1644') {
-                groupBox.style.display = 'block';
-            } else {
-                alert('口令错误，请联系主播确认！');
-                groupBox.style.display = 'none';
+        // MD5 工具函数（必须保留）
+        function md5(string) {
+            function md5_RotateLeft(lValue, iShiftBits) {
+                return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
             }
+            function md5_AddUnsigned(lX, lY) {
+                var lX4, lY4, lX8, lY8, lResult;
+                lX8 = (lX & 0x80000000);
+                lY8 = (lY & 0x80000000);
+                lX4 = (lX & 0x40000000);
+                lY4 = (lY & 0x40000000);
+                lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
+                if (lX4 & lY4) {
+                    return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+                }
+                if (lX4 | lY4) {
+                    if (lResult & 0x40000000) {
+                        return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+                    } else {
+                        return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+                    }
+                } else {
+                    return (lResult ^ lX8 ^ lY8);
+                }
+            }
+            function md5_F(x, y, z) { return (x & y) | ((~x) & z); }
+            function md5_G(x, y, z) { return (x & z) | (y & (~z)); }
+            function md5_H(x, y, z) { return (x ^ y ^ z); }
+            function md5_I(x, y, z) { return (y ^ (x | (~z))); }
+            function md5_FF(a, b, c, d, x, s, ac) {
+                a = md5_AddUnsigned(a, md5_AddUnsigned(md5_F(b, c, d), md5_AddUnsigned(x, ac)));
+                return md5_RotateLeft(a, s) ^ b;
+            }
+            function md5_GG(a, b, c, d, x, s, ac) {
+                a = md5_AddUnsigned(a, md5_AddUnsigned(md5_G(b, c, d), md5_AddUnsigned(x, ac)));
+                return md5_RotateLeft(a, s) ^ b;
+            }
+            function md5_HH(a, b, c, d, x, s, ac) {
+                a = md5_AddUnsigned(a, md5_AddUnsigned(md5_H(b, c, d), md5_AddUnsigned(x, ac)));
+                return md5_RotateLeft(a, s) ^ b;
+            }
+            function md5_II(a, b, c, d, x, s, ac) {
+                a = md5_AddUnsigned(a, md5_AddUnsigned(md5_I(b, c, d), md5_AddUnsigned(x, ac)));
+                return md5_RotateLeft(a, s) ^ b;
+            }
+            function md5_ConvertToWordArray(string) {
+                var lWordCount;
+                var lMessageLength = string.length;
+                var lNumberOfWords_temp1 = lMessageLength + 8;
+                var lNumberOfWords_temp2 = (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
+                var lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
+                var lWordArray = Array(lNumberOfWords - 1);
+                var lBytePosition = 0;
+                var lByteCount = 0;
+                while (lByteCount < lMessageLength) {
+                    lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+                    lBytePosition = (lByteCount % 4) * 8;
+                    lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount) << lBytePosition));
+                    lByteCount++;
+                }
+                lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+                lBytePosition = (lByteCount % 4) * 8;
+                lWordArray[lWordCount] = (lWordArray[lWordCount] | (0x80 << lBytePosition));
+                lWordCount = lNumberOfWords - 2;
+                lWordArray[lWordCount] = lMessageLength << 3;
+                lWordArray[lWordCount + 1] = lMessageLength >>> 29;
+                return lWordArray;
+            }
+            function md5_WordToHex(lValue) {
+                var lByte, lH;
+                var stHexOutput = "";
+                for (lByte = 0; lByte < 4; lByte++) {
+                    lH = (lValue >>> (lByte * 8 + 4)) & 0x0F;
+                    stHexOutput += lH.toString(16);
+                    lH = (lValue >>> (lByte * 8)) & 0x0F;
+                    stHexOutput += lH.toString(16);
+                }
+                return stHexOutput;
+            }
+            function md5_CalcMD5(lWordArray) {
+                var x = lWordArray;
+                var a = 1732584193;
+                var b = -271733879;
+                var c = -1732584194;
+                var d = 271733878;
+                var k, AA, BB, CC, DD;
+                for (k = 0; k < x.length; k += 16) {
+                    AA = a;
+                    BB = b;
+                    CC = c;
+                    DD = d;
+                    a = md5_FF(a, b, c, d, x[k + 0], 7, -680876936);
+                    d = md5_FF(d, a, b, c, x[k + 1], 12, -389564586);
+                    c = md5_FF(c, d, a, b, x[k + 2], 17, 606105819);
+                    b = md5_FF(b, c, d, a, x[k + 3], 22, -1044525330);
+                    a = md5_FF(a, b, c, d, x[k + 4], 7, -176418897);
+                    d = md5_FF(d, a, b, c, x[k + 5], 12, 1200080426);
+                    c = md5_FF(c, d, a, b, x[k + 6], 17, -1473231341);
+                    b = md5_FF(b, c, d, a, x[k + 7], 22, -45705983);
+                    a = md5_FF(a, b, c, d, x[k + 8], 7, 1770035416);
+                    d = md5_FF(d, a, b, c, x[k + 9], 12, -1958414417);
+                    c = md5_FF(c, d, a, b, x[k + 10], 17, -42063);
+                    b = md5_FF(b, c, d, a, x[k + 11], 22, -1990404162);
+                    a = md5_FF(a, b, c, d, x[k + 12], 7, 1804603682);
+                    d = md5_FF(d, a, b, c, x[k + 13], 12, -40341101);
+                    c = md5_FF(c, d, a, b, x[k + 14], 17, -1502002290);
+                    b = md5_FF(b, c, d, a, x[k + 15], 22, 1236535329);
+                    a = md5_GG(a, b, c, d, x[k + 1], 5, -165796510);
+                    d = md5_GG(d, a, b, c, x[k + 6], 9, -1069501632);
+                    c = md5_GG(c, d, a, b, x[k + 11], 14, 643717713);
+                    b = md5_GG(b, c, d, a, x[k + 0], 20, -373897302);
+                    a = md5_GG(a, b, c, d, x[k + 5], 5, -701558691);
+                    d = md5_GG(d, a, b, c, x[k + 10], 9, 38016083);
+                    c = md5_GG(c, d, a, b, x[k + 15], 14, -660478335);
+                    b = md5_GG(b, c, d, a, x[k + 4], 20, -405537848);
+                    a = md5_GG(a, b, c, d, x[k + 9], 5, 568446438);
+                    d = md5_GG(d, a, b, c, x[k + 14], 9, -1019803690);
+                    c = md5_GG(c, d, a, b, x[k + 3], 14, -187363961);
+                    b = md5_GG(b, c, d, a, x[k + 8], 20, 1163531501);
+                    a = md5_GG(a, b, c, d, x[k + 13], 5, -1444681467);
+                    d = md5_GG(d, a, b, c, x[k + 2], 9, -51403784);
+                    c = md5_GG(c, d, a, b, x[k + 7], 14, 1735328473);
+                    b = md5_GG(b, c, d, a, x[k + 12], 20, -1926607734);
+                    a = md5_HH(a, b, c, d, x[k + 5], 4, -378558);
+                    d = md5_HH(d, a, b, c, x[k + 8], 11, -2022574463);
+                    c = md5_HH(c, d, a, b, x[k + 11], 16, 1839030562);
+                    b = md5_HH(b, c, d, a, x[k + 14], 23, -35309556);
+                    a = md5_HH(a, b, c, d, x[k + 1], 4, -153099594);
+                    d = md5_HH(d, a, b, c, x[k + 4], 11, -129094894);
+                    c = md5_HH(c, d, a, b, x[k + 7], 16, 110132378);
+                    b = md5_HH(b, c, d, a, x[k + 10], 23, -147334815);
+                    a = md5_HH(a, b, c, d, x[k + 13], 4, -45705983);
+                    d = md5_HH(d, a, b, c, x[k + 0], 11, 1770035416);
+                    c = md5_HH(c, d, a, b, x[k + 3], 16, -1958414417);
+                    b = md5_HH(b, c, d, a, x[k + 6], 23, -42063);
+                    a = md5_HH(a, b, c, d, x[k + 9], 4, -1990404162);
+                    d = md5_HH(d, a, b, c, x[k + 12], 11, 1804603682);
+                    c = md5_HH(c, d, a, b, x[k + 15], 16, -40341101);
+                    b = md5_HH(b, c, d, a, x[k + 2], 23, -1502002290);
+                    a = md5_II(a, b, c, d, x[k + 0], 6, -198630844);
+                    d = md5_II(d, a, b, c, x[k + 7], 10, 1126891415);
+                    c = md5_II(c, d, a, b, x[k + 14], 15, -1378688529);
+                    b = md5_II(b, c, d, a, x[k + 5], 21, -1632237824);
+                    a = md5_II(a, b, c, d, x[k + 12], 6, -378558);
+                    d = md5_II(d, a, b, c, x[k + 3], 10, -2022574463);
+                    c = md5_II(c, d, a, b, x[k + 10], 15, 1839030562);
+                    b = md5_II(b, c, d, a, x[k + 1], 21, -35309556);
+                    a = md5_II(a, b, c, d, x[k + 8], 6, -153099594);
+                    d = md5_II(d, a, b, c, x[k + 15], 10, -129094894);
+                    c = md5_II(c, d, a, b, x[k + 6], 15, 110132378);
+                    b = md5_II(b, c, d, a, x[k + 13], 21, -147334815);
+                    a = md5_II(a, b, c, d, x[k + 4], 6, -45705983);
+                    d = md5_II(d, a, b, c, x[k + 11], 10, 1770035416);
+                    c = md5_II(c, d, a, b, x[k + 2], 15, -1958414417);
+                    b = md5_II(b, c, d, a, x[k + 9], 21, -42063);
+                    a = md5_II(a, b, c, d, x[k + 14], 6, -1990404162);
+                    d = md5_II(d, a, b, c, x[k + 1], 10, 1804603682);
+                    c = md5_II(c, d, a, b, x[k + 8], 15, -40341101);
+                    b = md5_II(b, c, d, a, x[k + 15], 21, -1502002290);
+                    a = md5_AddUnsigned(a, AA);
+                    b = md5_AddUnsigned(b, BB);
+                    c = md5_AddUnsigned(c, CC);
+                    d = md5_AddUnsigned(d, DD);
+                }
+                return Array(a, b, c, d);
+            }
+            var lWordArray = md5_ConvertToWordArray(string);
+            var lByteCount = md5_CalcMD5(lWordArray);
+            var stHexString = md5_WordToHex(lByteCount[0]) + md5_WordToHex(lByteCount[1]) + md5_WordToHex(lByteCount[2]) + md5_WordToHex(lByteCount[3]);
+            return stHexString;
         }
     </script>
 </body>
