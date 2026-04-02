@@ -12,64 +12,76 @@
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
         }
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: #f7f8fa;
             padding: 20px;
         }
         .container {
-            max-width: 400px;
-            margin: 50px auto;
+            max-width: 420px;
+            margin: 40px auto;
             background: white;
+            border-radius: 16px;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             text-align: center;
         }
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 30px;
         }
         .price {
-            font-size: 24px;
+            font-size: 32px;
             color: #ff4444;
             font-weight: bold;
-            margin: 20px 0;
+            margin-bottom: 25px;
         }
         .pay-btn {
             width: 100%;
-            padding: 15px;
-            margin: 10px 0;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
             border: none;
-            border-radius: 8px;
-            font-size: 18px;
+            margin: 10px 0;
             cursor: pointer;
-            color: white;
+            transition: all 0.2s;
         }
         .wx-btn {
             background: #07C160;
+            color: white;
         }
         .ali-btn {
             background: #1677FF;
+            color: white;
+        }
+        .pay-btn:active {
+            transform: scale(0.98);
         }
         .qrcode {
             width: 240px;
             height: 240px;
-            margin: 20px auto;
+            margin: 15px auto;
             border-radius: 8px;
             display: none;
         }
         .confirm-btn {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: #ff4444;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 18px;
+            border-radius: 12px;
+            font-size: 17px;
             font-weight: bold;
             margin-top: 20px;
             cursor: pointer;
-            display: none;
+            display: none; /* 初始彻底隐藏！ */
         }
         .group-qrcode {
             width: 280px;
@@ -79,16 +91,16 @@
             display: none;
         }
         .success-text {
-            font-size: 20px;
+            font-size: 18px;
             color: #07C160;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: none;
         }
         .tip {
-            color: #666;
+            font-size: 13px;
+            color: #999;
             margin-top: 20px;
-            font-size: 14px;
         }
         /* 弹窗样式 */
         .modal {
@@ -152,8 +164,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>🏁 F1永久粉丝群</h2>
-        <p>专属赛事解析 / 内部资讯 / 主播福利</p>
+        <div class="title">🏁 F1永久粉丝群</div>
+        <div class="subtitle">专属赛事解析 / 内部资讯 / 主播福利</div>
         <div class="price">¥35</div>
 
         <!-- 支付按钮 -->
@@ -166,14 +178,14 @@
         <!-- 支付宝收款码 -->
         <img class="qrcode" id="aliQrcode" src="https://shaxinwalker-sketch.github.io/alipay-pay.png" alt="支付宝收款码">
 
-        <!-- 已付款按钮 -->
+        <!-- 已付款按钮（初始彻底隐藏！） -->
         <button class="confirm-btn" id="confirmBtn" onclick="openConfirmModal()">✅ 我已付款，进群</button>
 
         <!-- 付款成功 & 群二维码 -->
         <div class="success-text" id="successText">付款成功！扫码进群</div>
         <img class="group-qrcode" id="groupQrcode" src="https://shaxinwalker-sketch.github.io/new-wechat-group.png" alt="F1粉丝群">
 
-        <p class="tip">付款后点击「我已付款，进群」，完成验证后自动进群</p>
+        <div class="tip">付款后点击「已付款」，自动弹出群二维码</div>
     </div>
 
     <!-- 二次确认弹窗 -->
@@ -192,22 +204,32 @@
     </div>
 
     <script>
-        // 显示微信支付
+        // 核心：页面加载时，彻底隐藏所有非初始元素
+        window.onload = function() {
+            document.getElementById('wxQrcode').style.display = 'none';
+            document.getElementById('aliQrcode').style.display = 'none';
+            document.getElementById('confirmBtn').style.display = 'none';
+            document.getElementById('successText').style.display = 'none';
+            document.getElementById('groupQrcode').style.display = 'none';
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        // 显示微信支付（只有点这个，才会出按钮）
         function showWxPay() {
             document.getElementById('wxQrcode').style.display = 'block';
             document.getElementById('aliQrcode').style.display = 'none';
-            document.getElementById('confirmBtn').style.display = 'block';
-            // 每次点支付，隐藏群码和成功提示
+            document.getElementById('confirmBtn').style.display = 'block'; // 只有点支付，才出按钮
+            // 每次点支付，隐藏群码
             document.getElementById('successText').style.display = 'none';
             document.getElementById('groupQrcode').style.display = 'none';
         }
 
-        // 显示支付宝支付
+        // 显示支付宝支付（只有点这个，才会出按钮）
         function showAliPay() {
             document.getElementById('aliQrcode').style.display = 'block';
             document.getElementById('wxQrcode').style.display = 'none';
-            document.getElementById('confirmBtn').style.display = 'block';
-            // 每次点支付，隐藏群码和成功提示
+            document.getElementById('confirmBtn').style.display = 'block'; // 只有点支付，才出按钮
+            // 每次点支付，隐藏群码
             document.getElementById('successText').style.display = 'none';
             document.getElementById('groupQrcode').style.display = 'none';
         }
@@ -224,7 +246,7 @@
 
         // 显示群二维码（付款成功）
         function showGroupQrcode() {
-            closeModal(); // 关闭弹窗
+            closeModal();
             document.getElementById('successText').style.display = 'block';
             document.getElementById('groupQrcode').style.display = 'block';
             document.getElementById('confirmBtn').style.display = 'none';
