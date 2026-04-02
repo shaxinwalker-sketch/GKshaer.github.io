@@ -3,89 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1粉丝群付费入群</title>
+    <title>F1永久粉丝群 - 35元入群</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
         }
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: #f7f8fa;
             padding: 20px;
         }
         .container {
-            max-width: 400px;
-            margin: 50px auto;
+            max-width: 420px;
+            margin: 40px auto;
             background: white;
+            border-radius: 16px;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             text-align: center;
         }
-        h2 {
-            margin-bottom: 10px;
-            color: #333;
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 8px;
         }
-        p {
+        .subtitle {
+            font-size: 15px;
             color: #666;
             margin-bottom: 30px;
         }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+        .price {
+            font-size: 32px;
+            color: #ff4444;
+            font-weight: bold;
+            margin-bottom: 25px;
         }
-        .btn.white {
+        .pay-box {
+            margin-bottom: 20px;
+        }
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            border: none;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .wx-btn {
             background: #07C160;
             color: white;
         }
-        .btn.blue {
+        .ali-btn {
             background: #1677FF;
             color: white;
+        }
+        .pay-btn:active {
+            transform: scale(0.98);
+        }
+        .qrcode {
+            width: 240px;
+            height: 240px;
+            margin: 15px auto;
+            border-radius: 8px;
+            display: none;
+        }
+        .confirm-btn {
+            width: 100%;
+            padding: 16px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            display: none;
+        }
+        .group-qrcode {
+            width: 280px;
+            height: 280px;
+            margin: 20px auto;
+            border-radius: 12px;
+            display: none;
+        }
+        .success-text {
+            font-size: 18px;
+            color: #07C160;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .tip {
+            font-size: 13px;
+            color: #999;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>F1永久粉丝群</h2>
-        <p>付款 35 元，自动进入粉丝群</p>
+        <div class="title">🏁 F1永久粉丝群</div>
+        <div class="subtitle">专属赛事解析 / 内部资讯 / 主播福利</div>
+        <div class="price">¥35</div>
 
-        <!-- 微信支付 -->
-        <form action="https://www.ezfpy.cn/submit.php" method="POST" target="_blank">
-            <input type="hidden" name="pid" value="1523">
-            <input type="hidden" name="type" value="1">
-            <input type="hidden" name="out_trade_no" value="F1永久粉丝群">
-            <input type="hidden" name="name" value="F1永久粉丝群">
-            <input type="hidden" name="money" value="35">
-            <input type="hidden" name="notify_url" value="https://www.ezfpy.cn/notify_url.php">
-            <input type="hidden" name="return_url" value="https://www.ezfpy.cn/return_url.php">
-            <input type="hidden" name="sitename" value="F1粉丝群">
-            <input type="hidden" name="sign" value="MD5">
-            <input type="hidden" name="sign_type" value="MD5">
-            <button type="submit" class="btn white">微信支付 35元</button>
-        </form>
+                 <!-- 支付按钮 -->
+         <button class="pay-btn wx-btn" onclick="showWxPay()">微信支付 35元</button>
+         <button class="pay-btn ali-btn" onclick="showAliPay()">支付宝支付 35元</button>
 
-        <!-- 支付宝支付 -->
-        <form action="https://www.ezfpy.cn/submit.php" method="POST" target="_blank">
-            <input type="hidden" name="pid" value="1523">
-            <input type="hidden" name="type" value="2">
-            <input type="hidden" name="out_trade_no" value="F1永久粉丝群">
-            <input type="hidden" name="name" value="F1永久粉丝群">
-            <input type="hidden" name="money" value="35">
-            <input type="hidden" name="notify_url" value="https://www.ezfpy.cn/notify_url.php">
-            <input type="hidden" name="return_url" value="https://www.ezfpy.cn/return_url.php">
-            <input type="hidden" name="sitename" value="F1粉丝群">
-            <input type="hidden" name="sign" value="MD5">
-            <input type="hidden" name="sign_type" value="MD5">
-            <button type="submit" class="btn blue">支付宝支付 35元</button>
-        </form>
-    </div>
+         <!-- 微信收款码 -->
+         <div class="pay-box" id="wxPay">
+            src="https://shaxinwalker-sketch.github.io/wechat-pay.png"
+         </div>
+
+         <!-- 支付宝收款码 -->
+         <div class="pay-box" id="aliPay">
+            src="https://shaxinwalker-sketch.github.io/alipay-pay.png"
+         </div>
+
+         <!-- 已付款按钮 -->
+         <button class="confirm-btn" id="confirmBtn" onclick="showGroupQrcode()">✅ 我已付款，进群</button>
+         
+         <!-- 付款成功 & 群二维码 -->
+         <div class="successText" id="successText">付款成功！扫码进群</div>
+         src="https://shaxinwalker-sketch.github.io/new-wechat-group.png"
+         
+         <div class="tip">付款后点击「已付款」，自动弹出群二维码。</div>
+    <script>
+        // 显示微信支付
+        function showWxPay() {
+            document.getElementById('wxQrcode').style.display = 'block';
+            document.getElementById('aliQrcode').style.display = 'none';
+            document.getElementById('confirmBtn').style.display = 'block';
+        }
+
+        // 显示支付宝支付
+        function showAliPay() {
+            document.getElementById('aliQrcode').style.display = 'block';
+            document.getElementById('wxQrcode').style.display = 'none';
+            document.getElementById('confirmBtn').style.display = 'block';
+        }
+
+        // 显示群二维码（付款成功）
+        function showGroupQrcode() {
+            document.getElementById('successText').style.display = 'block';
+            document.getElementById('groupQrcode').style.display = 'block';
+            document.getElementById('confirmBtn').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
