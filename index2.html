@@ -1,264 +1,67 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1永久粉丝群 - 35元入群</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-        }
-        body {
-            background: #f7f8fa;
-            padding: 20px;
-        }
-        .container {
-            max-width: 420px;
-            margin: 40px auto;
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
-        .subtitle {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .price {
-            font-size: 32px;
-            color: #ff4444;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-        .pay-btn {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: 600;
-            border: none;
-            margin: 10px 0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .wx-btn {
-            background: #07C160;
-            color: white;
-        }
-        .ali-btn {
-            background: #1677FF;
-            color: white;
-        }
-        .pay-btn:active {
-            transform: scale(0.98);
-        }
-        .qrcode {
-            width: 240px;
-            height: 240px;
-            margin: 15px auto;
-            border-radius: 8px;
-            display: none;
-        }
-        .confirm-btn {
-            width: 100%;
-            padding: 16px;
-            background: #ff4444;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: bold;
-            margin-top: 20px;
-            cursor: pointer;
-            display: none; /* 初始彻底隐藏！ */
-        }
-        .group-qrcode {
-            width: 280px;
-            height: 280px;
-            margin: 20px auto;
-            border-radius: 12px;
-            display: none;
-        }
-        .success-text {
-            font-size: 18px;
-            color: #07C160;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: none;
-        }
-        .tip {
-            font-size: 13px;
-            color: #999;
-            margin-top: 20px;
-        }
-        /* 弹窗样式 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-            position: relative;
-        }
-        .modal-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .modal-text {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-        .modal-btn {
-            width: 48%;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-        }
-        .confirm-modal-btn {
-            background: #07C160;
-            color: white;
-        }
-        .cancel-modal-btn {
-            background: #999;
-            color: white;
-        }
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #999;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F1粉丝群 35元入群</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f5f5;padding:20px}
+.container{max-width:400px;margin:40px auto;background:#fff;border-radius:16px;padding:30px;text-align:center}
+h2{margin-bottom:10px}
+.price{font-size:28px;color:red;margin:20px 0}
+.btn{width:100%;padding:16px;border:none;border-radius:12px;font-size:16px;margin:8px 0;color:#fff}
+.wx{background:#07c160}
+.ali{background:#1677ff}
+.confirm{background:#ff3333}
+.qrcode{width:240px;height:240px;margin:15px auto;display:none}
+.group{width:280px;height:280px;margin:20px auto;display:none}
+.msg{color:green;font-weight:bold;margin:10px 0;display:none}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="title">🏁 F1永久粉丝群</div>
-        <div class="subtitle">专属赛事解析 / 内部资讯 / 主播福利</div>
-        <div class="price">¥35</div>
+<div class="container">
+<h2>🏁 F1永久粉丝群</h2>
+<p>内部资讯 · 直播福利 · 实时聊车</p>
+<div class="price">¥35</div>
 
-        <!-- 支付按钮 -->
-        <button class="pay-btn wx-btn" onclick="showWxPay()">微信支付 35元</button>
-        <button class="pay-btn ali-btn" onclick="showAliPay()">支付宝支付 35元</button>
+<button class="btn wx" onclick="showWx()">微信支付</button>
+<button class="btn ali" onclick="showAli()">支付宝支付</button>
 
-        <!-- 微信收款码 -->
-        <img class="qrcode" id="wxQrcode" src="https://shaxinwalker-sketch.github.io/wechat-pay.png" alt="微信收款码">
+<img id="wx" class="qrcode" src="wechat-pay.png">
+<img id="ali" class="qrcode" src="alipay-pay.png">
 
-        <!-- 支付宝收款码 -->
-        <img class="qrcode" id="aliQrcode" src="https://shaxinwalker-sketch.github.io/alipay-pay.png" alt="支付宝收款码">
+<button class="btn confirm" onclick="showQun()" id="confirm" style="display:none">✅ 我已付款，进群</button>
 
-        <!-- 已付款按钮（初始彻底隐藏！） -->
-        <button class="confirm-btn" id="confirmBtn" onclick="openConfirmModal()">✅ 我已付款，进群</button>
+<div class="msg" id="msg">付款成功！请扫码进群</div>
+<img id="qun" class="group" src="new-wechat-group.png">
 
-        <!-- 付款成功 & 群二维码 -->
-        <div class="success-text" id="successText">付款成功！扫码进群</div>
-        <img class="group-qrcode" id="groupQrcode" src="https://shaxinwalker-sketch.github.io/new-wechat-group.png" alt="F1粉丝群">
+<p style="margin-top:20px;color:#999;font-size:14px">
+未付款请勿点击，主播会核对账单，未付款无法进群
+</p>
+</div>
 
-        <div class="tip">付款后点击「已付款」，自动弹出群二维码</div>
-    </div>
-
-    <!-- 二次确认弹窗 -->
-    <div id="confirmModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="modal-title">⚠️ 入群验证</div>
-            <div class="modal-text">
-                请确认您已完成35元付款，<br>
-                付款截图可私信主播核验，<br>
-                未付款点击确认将无法进群！
-            </div>
-            <button class="modal-btn confirm-modal-btn" onclick="showGroupQrcode()">我已付款，确认进群</button>
-            <button class="modal-btn cancel-modal-btn" onclick="closeModal()">取消</button>
-        </div>
-    </div>
-
-    <script>
-        // 核心：页面加载时，彻底隐藏所有非初始元素
-        window.onload = function() {
-            document.getElementById('wxQrcode').style.display = 'none';
-            document.getElementById('aliQrcode').style.display = 'none';
-            document.getElementById('confirmBtn').style.display = 'none';
-            document.getElementById('successText').style.display = 'none';
-            document.getElementById('groupQrcode').style.display = 'none';
-            document.getElementById('confirmModal').style.display = 'none';
-        }
-
-        // 显示微信支付（只有点这个，才会出按钮）
-        function showWxPay() {
-            document.getElementById('wxQrcode').style.display = 'block';
-            document.getElementById('aliQrcode').style.display = 'none';
-            document.getElementById('confirmBtn').style.display = 'block'; // 只有点支付，才出按钮
-            // 每次点支付，隐藏群码
-            document.getElementById('successText').style.display = 'none';
-            document.getElementById('groupQrcode').style.display = 'none';
-        }
-
-        // 显示支付宝支付（只有点这个，才会出按钮）
-        function showAliPay() {
-            document.getElementById('aliQrcode').style.display = 'block';
-            document.getElementById('wxQrcode').style.display = 'none';
-            document.getElementById('confirmBtn').style.display = 'block'; // 只有点支付，才出按钮
-            // 每次点支付，隐藏群码
-            document.getElementById('successText').style.display = 'none';
-            document.getElementById('groupQrcode').style.display = 'none';
-        }
-
-        // 打开确认弹窗
-        function openConfirmModal() {
-            document.getElementById('confirmModal').style.display = 'block';
-        }
-
-        // 关闭弹窗
-        function closeModal() {
-            document.getElementById('confirmModal').style.display = 'none';
-        }
-
-        // 显示群二维码（付款成功）
-        function showGroupQrcode() {
-            closeModal();
-            document.getElementById('successText').style.display = 'block';
-            document.getElementById('groupQrcode').style.display = 'block';
-            document.getElementById('confirmBtn').style.display = 'none';
-        }
-
-        // 点击弹窗外部关闭
-        window.onclick = function(event) {
-            const modal = document.getElementById('confirmModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+<script>
+function showWx(){
+  document.getElementById('wx').style.display='block'
+  document.getElementById('ali').style.display='none'
+  document.getElementById('confirm').style.display='block'
+  document.getElementById('msg').style.display='none'
+  document.getElementById('qun').style.display='none'
+}
+function showAli(){
+  document.getElementById('ali').style.display='block'
+  document.getElementById('wx').style.display='none'
+  document.getElementById('confirm').style.display='block'
+  document.getElementById('msg').style.display='none'
+  document.getElementById('qun').style.display='none'
+}
+function showQun(){
+  if(confirm('⚠ 确认已完成35元付款吗？未付款无法进群')){
+    document.getElementById('msg').style.display='block'
+    document.getElementById('qun').style.display='block'
+  }
+}
+</script>
 </body>
 </html>
