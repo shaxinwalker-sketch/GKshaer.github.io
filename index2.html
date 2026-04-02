@@ -108,31 +108,40 @@
     </style>
 </head>
 <body>
-    <div class="container">
+       <div class="container">
         <div class="title">🏁 F1永久粉丝群</div>
         <div class="subtitle">专属赛事解析 / 内部资讯 / 主播福利</div>
         <div class="price">¥35</div>
 
-                 <!-- 支付按钮 -->
-         <button class="pay-btn wx-btn" onclick="showWxPay()">微信支付 35元</button>
-         <button class="pay-btn ali-btn" onclick="showAliPay()">支付宝支付 35元</button>
+        <!-- 支付按钮 -->
+        <button class="pay-btn wx-btn" onclick="showWxPay()">微信支付 35元</button>
+        <button class="pay-btn ali-btn" onclick="showAliPay()">支付宝支付 35元</button>
 
-         <!-- 微信收款码 -->
-         <div class="pay-box" id="wxPay">
-            src="https://shaxinwalker-sketch.github.io/wechat-pay.png"
-         </div>
+        <!-- 微信收款码 -->
+        <div class="pay-box" id="wxPay">
+            <img class="qrcode" id="wxQrcode" src="https://shaxinwalker-sketch.github.io/wechat-pay.png" alt="微信收款码">
+        </div>
 
-         <!-- 支付宝收款码 -->
-         <div class="pay-box" id="aliPay">
-            src="https://shaxinwalker-sketch.github.io/alipay-pay.png"
-         </div>
+        <!-- 支付宝收款码 -->
+        <div class="pay-box" id="aliPay">
+            <img class="qrcode" id="aliQrcode" src="https://shaxinwalker-sketch.github.io/alipay-pay.png" alt="支付宝收款码">
+        </div>
 
+        <!-- 已付款按钮 -->
+        <button class="confirm-btn" id="confirmBtn" onclick="showGroupQrcode()">✅ 我已付款，进群</button>
+
+        <!-- 付款成功 & 群二维码 -->
+        <div class="success-text" id="successText">付款成功！扫码进群</div>
+        <img class="group-qrcode" id="groupQrcode" src="https://shaxinwalker-sketch.github.io/new-wechat-group.png" alt="F1粉丝群">
+
+        <div class="tip">付款后点击「已付款」，自动弹出群二维码</div>
+    </div>
          <!-- 已付款按钮 -->
          <button class="confirm-btn" id="confirmBtn" onclick="showGroupQrcode()">✅ 我已付款，进群</button>
          
          <!-- 付款成功 & 群二维码 -->
          <div class="successText" id="successText">付款成功！扫码进群</div>
-         src="https://shaxinwalker-sketch.github.io/new-wechat-group.png"
+         src="https://shaxinwalker-sketch.github.io/New-wechat-group.png"
          
          <div class="tip">付款后点击「已付款」，自动弹出群二维码。</div>
     <script>
